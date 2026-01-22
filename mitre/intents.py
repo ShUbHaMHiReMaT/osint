@@ -1,56 +1,41 @@
+# mitre/intents.py
+
 INTENTS = {
-    "crash_server": {
-        "label": "💥 Crash a Server",
-        "description": "Identify weaknesses that could lead to denial of service",
+    "infra_audit": {
+        "label": "💥 Infrastructure Audit",
+        "description": "Assess server stability and resilience against denial of service.",
         "techniques": [
             {
                 "id": "T1499",
-                "name": "Endpoint Denial of Service",
-                "what_to_look_for": [
-                    "Unprotected services",
-                    "No rate limiting",
-                    "Single points of failure"
-                ]
+                "name": "Endpoint Weakness ID",
+                "focus": ["Unprotected APIs", "Missing Rate Limits", "XMLRPC Interfaces"]
             },
             {
                 "id": "T1046",
-                "name": "Network Service Discovery",
-                "what_to_look_for": [
-                    "Open ports",
-                    "Exposed management services"
-                ]
+                "name": "Service Discovery",
+                "focus": ["Open Ports", "Default Pages", "Exposed Dashboards"]
             }
         ]
     },
-
-    "steal_data": {
-        "label": "📦 Steal Sensitive Data",
-        "description": "Identify exposure paths to sensitive information",
+    "data_exfil": {
+        "label": "📦 Data Leakage Check",
+        "description": "Identify publicly exposed sensitive files and directories.",
         "techniques": [
             {
                 "id": "T1213",
-                "name": "Data from Information Repositories",
-                "what_to_look_for": [
-                    "Public documents",
-                    "Open directories",
-                    "Cloud storage leaks"
-                ]
+                "name": "Repository Mining",
+                "focus": ["Public S3 Buckets", "Git Logs", "Backup Files (.bak, .sql)"]
             }
         ]
     },
-
-    "take_over_account": {
-        "label": "🔓 Take Over an Account",
-        "description": "Identify authentication weaknesses",
+    "access_validation": {
+        "label": "🔓 Access Control Validation",
+        "description": "Locate administrative entry points and authentication gaps.",
         "techniques": [
             {
                 "id": "T1110",
-                "name": "Brute Force",
-                "what_to_look_for": [
-                    "Login portals",
-                    "No CAPTCHA",
-                    "Weak password policy"
-                ]
+                "name": "Auth Surface Mapping",
+                "focus": ["Admin Portals", "Forgot Password Flows", "No-Captcha Forms"]
             }
         ]
     }

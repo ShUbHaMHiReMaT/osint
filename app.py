@@ -1,51 +1,56 @@
-from flask import Flask, render_template, request, jsonify
+# app.py
+
+from flask import Flask, render_template, request, jsonify, redirect, url_for
 from mitre.mapper import get_intents, resolve_intent
-from recon.passive import recon_checklist
+from recon.passive import generate_checklist
 from core.validator import validate_domain
-from recon.google import google_dorks
-from flask import redirect, url_for
-
-
+from recon.google import generate_dorks
+import config
 
 app = Flask(__name__)
+app.config.from_object(config)
 
 @app.route("/")
 def dashboard():
+    """Renders the main advanced dashboard."""
     return render_template("dashboard.html", intents=get_intents())
 
-@app.route("/mitre")
-def mitre_view():
-    return redirect(url_for("dashboard"))
-
-
-@app.route("/api/intent", methods=["POST"])
-def intent_api():
+@app.route("/api/generate-plan", methods=["POST"])
+def generate_plan_api():
+    """
+    API Endpoint: Receives domain & intent, returns a tactical plan + dorks.
+    """
     data = request.json
     intent_key = data.get("intent")
     domain = data.get("domain")
 
-    if not validate_domain(domain):
-        return jsonify({"error": "Invalid domain"}), 400
+    # 1. Validation
+    if not domain or not validate_domain(domain):
+        return jsonify({"error": "Invalid or missing domain name."}), 400
 
     intent = resolve_intent(intent_key)
     if not intent:
-        return jsonify({"error": "Unknown intent"}), 400
+        return jsonify({"error": "Selected intent is invalid."}), 400
 
-    plan = [
-        recon_checklist(t)
-        for t in intent["techniques"]
-    ]
+    # 2. Logic Execution
+    # Generate the MITRE-based checklist
+    checklist = [generate_checklist(t) for t in intent["techniques"]]
+    
+    # Generate the Admin Hunter Dorks
+    dorks = generate_dorks(domain)
 
-    dorks = google_dorks(domain, intent_key)
-
+    # 3. Response Construction
     return jsonify({
-        "domain": domain,
-        "goal": intent["label"],
-        "description": intent["description"],
-        "plan": plan,
-        "google_dorks": dorks,
-        "note": "Google dorks are provided as links. Manual execution recommended for OPSEC."
+        "status": "success",
+        "target": domain,
+        "mission_profile": {
+            "goal": intent["label"],
+            "description": intent["description"],
+            "id": intent_key
+        },
+        "tactical_plan": checklist,
+        "intelligence_dorks": dorks
     })
 
 if __name__ == "__main__":
-    app.run(port=5000)
+    app.run(debug=True, port=5000)

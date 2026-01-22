@@ -1,21 +1,130 @@
+/* static/style.css */
+:root {
+    --bg-dark: #0a0b10;
+    --card-bg: #14161f;
+    --accent-green: #00ff9d;
+    --accent-blue: #00e5ff;
+    --accent-red: #ff2a6d;
+    --text-main: #e0e6ed;
+    --text-dim: #94a3b8;
+}
+
 body {
-  background: #0f0f12;
-  color: #e0e0e0;
-  font-family: sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Segoe UI', monospace;
+    margin: 0;
+    padding: 0;
 }
 
-nav {
-  background: #111;
-  padding: 10px;
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-nav a {
-  color: #00ff9d;
-  margin-right: 15px;
-  text-decoration: none;
+.highlight { color: var(--accent-green); }
+.danger-text { color: var(--accent-red); }
+
+.card {
+    background: var(--card-bg);
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 
-button {
-  padding: 10px;
-  margin-top: 10px;
+.danger-border { border-color: rgba(255, 42, 109, 0.3); }
+
+/* Inputs */
+.input-panel {
+    display: flex;
+    gap: 20px;
+    align-items: flex-end;
 }
+
+.input-group { flex: 1; }
+
+label {
+    display: block;
+    color: var(--accent-blue);
+    font-size: 0.8rem;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.cyber-input {
+    width: 100%;
+    background: #050505;
+    border: 1px solid #444;
+    color: #fff;
+    padding: 12px;
+    font-family: monospace;
+    border-radius: 4px;
+}
+
+.cyber-btn {
+    background: var(--accent-green);
+    color: #000;
+    border: none;
+    padding: 12px 25px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.3s;
+}
+
+.cyber-btn:hover {
+    box-shadow: 0 0 15px var(--accent-green);
+}
+
+/* Grids */
+.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.btn-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+/* Dork Buttons */
+.dork-btn {
+    background: #1e222f;
+    border: 1px solid #333;
+    color: #ccc;
+    padding: 15px;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: 0.2s;
+}
+
+.dork-btn:hover {
+    border-color: var(--accent-green);
+    color: #fff;
+    background: #252a3b;
+}
+
+.dork-btn span {
+    display: block;
+    font-size: 0.75rem;
+    color: #666;
+    margin-top: 4px;
+}
+
+.dork-btn.danger-btn:hover {
+    border-color: var(--accent-red);
+}
+
+/* Checklist items */
+.checklist-item {
+    border-bottom: 1px solid #222;
+    padding: 10px 0;
+}
+.checklist-item h3 { margin: 0; color: var(--accent-blue); font-size: 1rem; }
+.checklist-item ul { margin: 5px 0 0 20px; color: var(--text-dim); font-size: 0.9rem; }

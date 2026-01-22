@@ -1,19 +1,48 @@
 {% extends "base.html" %}
+
 {% block content %}
+<div class="mission-control">
+    <h1><span class="highlight">Recon</span>One Advanced</h1>
+    
+    <div class="card input-panel">
+        <div class="input-group">
+            <label>TARGET DOMAIN</label>
+            <input type="text" id="domain" placeholder="example.com" class="cyber-input">
+        </div>
+        
+        <div class="input-group">
+            <label>MISSION PROFILE</label>
+            <select id="intent" class="cyber-input">
+                {% for key, intent in intents.items() %}
+                    <option value="{{ key }}">{{ intent.label }}</option>
+                {% endfor %}
+            </select>
+        </div>
 
-<h1>What do you want to do?</h1>
+        <button onclick="executeMission()" class="cyber-btn">INITIALIZE SCAN</button>
+    </div>
 
-<input id="domain" placeholder="example.com">
+    <div id="results-area" style="display:none;">
+        
+        <div class="card">
+            <h2>📜 Mission Checklist</h2>
+            <div id="checklist-container"></div>
+        </div>
 
-<select id="intent">
-  {% for key, intent in intents.items() %}
-    <option value="{{ key }}">{{ intent.label }}</option>
-  {% endfor %}
-</select>
+        <div class="grid-2">
+            <div class="card">
+                <h2>🔎 General Reconnaissance</h2>
+                <div id="dorks-general" class="btn-grid"></div>
+            </div>
 
-<button onclick="run()">Generate Plan</button>
+            <div class="card danger-border">
+                <h2 class="danger-text">🔓 Admin & Login Hunter</h2>
+                <div id="dorks-admin" class="btn-grid"></div>
+            </div>
+        </div>
 
-<pre id="output"></pre>
+    </div>
+</div>
 
 <script src="/static/app.js"></script>
 {% endblock %}
