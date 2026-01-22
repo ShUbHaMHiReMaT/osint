@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>What do you want to do?</h1>
+
+<input id="domain" placeholder="example.com">
+
+<select id="intent">
+  {% for key, intent in intents.items() %}
+    <option value="{{ key }}">{{ intent.label }}</option>
+  {% endfor %}
+</select>
+
+<button onclick="run()">Generate Plan</button>
+
+<pre id="output"></pre>
+
+<script src="/static/app.js"></script>
+{% endblock %}
