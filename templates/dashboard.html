@@ -3,18 +3,24 @@
 {% block content %}
 <div class="mission-control">
     <h1><span class="highlight">Recon</span>One Advanced</h1>
-    
+    <div
+        style="text-align: center; margin: -20px 0 30px 0; opacity: 0.7; font-family: 'Share Tech Mono', monospace; font-size: 0.9rem; letter-spacing: 3px;">
+        <span style="color: #00ff41;">●</span> SYSTEM ONLINE
+        <span style="margin: 0 15px; color: #00d9ff;">|</span>
+        <span style="color: #00d9ff;">●</span> READY TO DEPLOY
+    </div>
+
     <div class="card input-panel">
         <div class="input-group">
             <label>TARGET DOMAIN</label>
             <input type="text" id="domain" placeholder="example.com" class="cyber-input">
         </div>
-        
+
         <div class="input-group">
             <label>MISSION PROFILE</label>
             <select id="intent" class="cyber-input">
                 {% for key, intent in intents.items() %}
-                    <option value="{{ key }}">{{ intent.label }}</option>
+                <option value="{{ key }}">{{ intent.label }}</option>
                 {% endfor %}
             </select>
         </div>
@@ -23,7 +29,7 @@
     </div>
 
     <div id="results-area" style="display:none;">
-        
+
         <div class="card">
             <h2>📜 Mission Checklist</h2>
             <div id="checklist-container"></div>
