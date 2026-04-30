@@ -1,14 +1,18 @@
 # Repository
 
 ## Overview
+This project executes primarily through `app.py` and coordinates the workflow across `app.py`, `static/app.js`, `mitre/mapper.py`, `core/validator.py`. At runtime, the main flow is: entrypoint: app.py.
+
 The system is built around README generation, inferred from module names, symbols, and imports.
 
 - Detected project type: Backend API
-- Parsed source surface: 10 files
 - Language profile: py: 8, md: 1, js: 1
 
 ## Architecture Flow
 1. entrypoint: `app.py`
+
+Module interaction hotspots:
+- `app.py` imports/depends on `config.py`
 
 ## Project Structure
 - **root/** (4 files)
