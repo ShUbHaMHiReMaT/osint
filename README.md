@@ -1,17 +1,24 @@
 # Repository
 
 ## Overview
-This project centers on parsing repository modules and generating developer-facing outputs from detected structure.
+The system is built around README generation, inferred from module names, symbols, and imports.
 
-Parsed surface: **9 files** · **12 functions** · **0 classes**
+- Detected project type: Backend API
+- Parsed source surface: 10 files
+- Language profile: py: 8, md: 1, js: 1
 
-## Tech Stack (detected from imports)
-- **Python**: 8 file(s)
-- **JavaScript**: 1 file(s)
-- **Flask**
+## Architecture Flow
+1. entrypoint: `app.py`
 
 ## Project Structure
+- **root/** (4 files)
+- **core/** (1 files)
+- **mitre/** (2 files)
+- **recon/** (2 files)
+- **static/** (1 files)
+
 ```text
+├── README.md
 ├── __init__.py
 ├── app.py
 ├── config.py
@@ -28,55 +35,18 @@ Parsed surface: **9 files** · **12 functions** · **0 classes**
 ```
 
 ## Modules
-- **`app.py`**: symbols `dashboard()`, `generate_plan_api()`; imports `config`, `core.validator`, `flask`, `mitre.mapper`.
-- **`static/app.js`**: symbols `executeMission()`, `renderDorkButtons()`, `showGlitchAlert()`; imports none.
-- **`mitre/mapper.py`**: symbols `get_intents()`, `resolve_intent()`; imports `mitre.intents`.
-- **`core/validator.py`**: symbols `validate_domain()`; imports `re`.
-- **`recon/google.py`**: symbols `generate_dorks()`; imports none.
-- **`recon/passive.py`**: symbols `generate_checklist()`; imports none.
-- **`mitre/intents.py`**: symbols no detected symbols; imports none.
-- **`config.py`**: symbols no detected symbols; imports none.
-- **`__init__.py`**: symbols no detected symbols; imports none.
-
-## Entrypoints
-- `app.py`
-
-## Entrypoint Preview
-```py
-# app.py
-
-from flask import Flask, render_template, request, jsonify, redirect, url_for
-from mitre.mapper import get_intents, resolve_intent
-from recon.passive import generate_checklist
-from core.validator import validate_domain
-from recon.google import generate_dorks
-import config
-import os
-
-app = Flask(__name__)
-app.config.from_object(config)
-
-@app.route("/")
-def dashboard():
-    """Renders the main advanced dashboard."""
-    return render_template("dashboard.html", intents=get_intents())
-
-@app.route("/api/generate-plan", methods=["POST"])
-def generate_plan_api():
-```
+- **`app.py`**: Entry or orchestration module. Key symbols: `dashboard()`, `generate_plan_api()`.
+- **`static/app.js`**: Entry or orchestration module. Key symbols: `executeMission()`, `renderDorkButtons()`, `showGlitchAlert()`.
+- **`mitre/mapper.py`**: Entry or orchestration module. Key symbols: `get_intents()`, `resolve_intent()`.
+- **`README.md`**: Function-oriented helper/business logic. Key symbols: `dashboard()`, `generate_plan_api()`.
+- **`core/validator.py`**: Function-oriented helper/business logic. Key symbols: `validate_domain()`.
+- **`recon/google.py`**: Function-oriented helper/business logic. Key symbols: `generate_dorks()`.
+- **`recon/passive.py`**: Function-oriented helper/business logic. Key symbols: `generate_checklist()`.
+- **`mitre/intents.py`**: Support module.
+- **`config.py`**: Support module.
+- **`__init__.py`**: Support module.
 
 ## Usage
-To run the application, execute the following command:
 ```bash
 python app.py
 ```
-
-## Architecture
-The architecture of this project is based on the following relationships:
-- `app.py` imports `config`, `core.validator`, `flask`, and `mitre.mapper`.
-- `mitre/mapper.py` imports `mitre.intents`.
-- `core/validator.py` imports `re`.
-- `recon/google.py` and `recon/passive.py` do not import any modules.
-
-## Change Guide
-- Core logic changes: `core/validator.py`
