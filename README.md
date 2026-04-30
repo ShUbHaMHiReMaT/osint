@@ -38,9 +38,9 @@ The system is built around README generation, inferred from module names, symbol
 - **`app.py`**: Entry or orchestration module. Key symbols: `dashboard()`, `generate_plan_api()`.
 - **`static/app.js`**: Entry or orchestration module. Key symbols: `executeMission()`, `renderDorkButtons()`, `showGlitchAlert()`.
 - **`mitre/mapper.py`**: Entry or orchestration module. Key symbols: `get_intents()`, `resolve_intent()`.
-- **`README.md`**: Function-oriented helper/business logic. Key symbols: `dashboard()`, `generate_plan_api()`.
 - **`core/validator.py`**: Function-oriented helper/business logic. Key symbols: `validate_domain()`.
 - **`recon/google.py`**: Function-oriented helper/business logic. Key symbols: `generate_dorks()`.
+- **`README.md`**: Class-oriented domain logic. Key symbols: `names`.
 - **`recon/passive.py`**: Function-oriented helper/business logic. Key symbols: `generate_checklist()`.
 - **`mitre/intents.py`**: Support module.
 - **`config.py`**: Support module.
